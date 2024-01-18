@@ -1,0 +1,14 @@
+{
+  "name": "qap1_s3_fullstackjs",
+  "version": "1.0.0",
+  "description": "QAP 1 (Semester 3: Back-End Development) - Full-Stack Javascript: Introduction to Node",
+  "main": "task2_sharp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.33.2"
+  }
+}
