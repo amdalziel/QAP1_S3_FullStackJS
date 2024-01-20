@@ -1,3 +1,5 @@
+// NPM Package - Sharp 
+
 const sharp = require('sharp');
 
 
@@ -11,10 +13,9 @@ let sagrada_front = {sagrada_front: './Images/original_images/sagrada_front.jpg'
 
 
 
-
 // Function to resize (change the width and height) and compress the image 
 async function resizeAndCompressImage(img, w, h) {
-
+ 
 
 // Variable 'imgUrl' is name of image (image object - value)
 const imgUrl = Object.values(img)[0]; 
@@ -33,9 +34,7 @@ const imgName = Object.keys(img)[0];
 
         console.log(`Image name: ${imgName}`);
         console.log(`Image resized to width: ${resizedImage.width} and height: ${resizedImage.height} `); 
-        console.log(`Edited image number of bytes: ${resizedImage.size}`); 
-        console.log(`Image saved in './Images/edited_images`);
-        console.log();  
+        consoleNotes(resizedImage); 
 
     } catch (error) {
         console.log(error); 
@@ -43,8 +42,11 @@ const imgName = Object.keys(img)[0];
 
 }; 
 
+
+
 // Function to alter the tint of an image (and compress the image)
 async function changeImageColor(img, rValue, gValue, bValue) {
+
 
 // Variable 'imgUrl' is name of image (image object - value)
 const imgUrl = Object.values(img)[0]; 
@@ -59,22 +61,56 @@ try {
 
     console.log(`Image name: ${imgName}`);
     console.log(`Image color: r: ${rValue}, g: ${gValue}, b: ${bValue}`);
-    console.log(`Edited image number of bytes: ${colorEditedImage.size}`); 
-    console.log(`Image saved in './Images/edited_images`);
-    console.log();  
+    consoleNotes(colorEditedImage); 
     
 } catch (error) {
     console.log(error); 
     
 }
+}; 
+
+
+
+// Function to turn the image into B&W 
+async function greyscale(img) {
+
+
+// Variable 'imgUrl' is name of image (image object - value)
+const imgUrl = Object.values(img)[0]; 
+// Variable 'imgName' is name of image (image object - key)
+const imgName = Object.keys(img)[0]; 
+
+try {
+    const greyscaleImage = await sharp(imgUrl)
+    .greyscale()
+    .toFormat("jpeg", { mozjpeg: true})
+    .toFile(`./Images/edited_images/${imgName}.jpg`);
+
+    console.log(`Image name: ${imgName}`);
+    console.log(`Image is now rendered in black and white.`);
+    consoleNotes(greyscaleImage); 
+    
+} catch (error) {
+    console.log(error); 
+
+}
 
 }; 
 
+// Function with console notes - added in each function above. 
+consoleNotes=(editedImg)=> {
+    console.log(`Edited image number of bytes: ${editedImg.size}`); 
+    console.log(`Image saved in './Images/edited_images`);
+    console.log(); 
+}
 
 // Resized/Compressed Images: 
 resizeAndCompressImage(sagrat_cor, 400, 600);
 resizeAndCompressImage(city_view, 500, 800); 
 
 // Changed Tint/Compressed Images: 
-changeImageColor(sagrada_front, 0, 150, 225); 
+changeImageColor(sagrada_front, 150, 135, 62); 
 changeImageColor(gaudi_facade, 100, 45, 45); 
+
+// Change to black & white 
+greyscale(gaudi_evening);
