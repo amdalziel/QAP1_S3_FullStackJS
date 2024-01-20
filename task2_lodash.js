@@ -3,31 +3,54 @@
 const _ = require('lodash'); 
 
 const classList = ['anakin Skywalker', 'darth vader', 'Padme Amidala', 'leia Organa', 'BABY Yoda', 'mace Windu']; 
-const courseName = ['The Force 101', 'Node, You Will Learn', 'Java: There is No Try']; 
+const bookTitleList = ['Death Star Database Design & Implementation', 'Node, You Will Learn', 'Java: There is No Try']; 
 
 
-// Modify the class list to start case (Abcd Efgh)
+// Modify the class list to start case (Aaaaa Bbbb Cccc)
 classList.forEach((student, index, array) => {
     array[index] = _.startCase(_.toLower(student)); 
     return array; 
 }); 
 
 // Confirm that the student names display correctly 
+console.log(`Class List (start case):`); 
 console.log(classList); 
+console.log(); 
 
 
 // Shuffle the order of students 
 const shuffledClassLst = _.shuffle(classList); 
 
 // Confirm that the students names are displayed in a random order 
-console.log(shuffledClassLst); 
+console.log(`Shuffled class list:`);
+console.log(shuffledClassLst);
+console.log();  
 
 
 // Divide the shuffled list of students into groups of 2
 const studentTeams = _.chunk(shuffledClassLst, 2); 
 
 // Confirm the groups of 2 have been created 
+console.log(`Students divided into groups of two:`);
 console.log(studentTeams);
+console.log(); 
+
+
+// Use a _.map loop to organize and record teams and assignements information: 
+// Team number (index)
+// Names of each team member
+// Book assigned for reading 
+
+const teamAssignment = _.map(studentTeams, function(student, index){
+    return (`Team ${index + 1} (${student[0]} and ${student[1]}) will read '${bookTitleList[index]}'`);
+}); 
+
+// Confirm the new array - teamAssignment - stores the information correctly 
+console.log(teamAssignment);
+
+
+
+
 
 
 
