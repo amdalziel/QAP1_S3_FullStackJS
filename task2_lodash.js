@@ -6,10 +6,10 @@ const classList = ['anakin Skywalker', 'darth vader', 'Padme Amidala', 'leia Org
 const bookTitleList = ['Death Star Database Design & Implementation', 'Node, You Will Learn', 'Java: There is No Try']; 
 
 
-// Modify the class list to start case (Aaaaa Bbbb Cccc)
-classList.forEach((student, index, array) => {
-    array[index] = _.startCase(_.toLower(student)); 
-    return array; 
+// Modify the class list to start case (Aaaaa Bbbb Cccc) using _.forEach and _.startCase 
+_.forEach(classList, (student, index) => {
+    classList[index] = _.startCase(_.toLower(student)); 
+    return classList; 
 }); 
 
 // Confirm that the student names display correctly 
@@ -41,7 +41,7 @@ console.log();
 // Names of each team member
 // Book assigned for reading 
 
-const teamAssignment = _.map(studentTeams, function(student, index){
+const teamAssignment = _.map(studentTeams, (student, index) => {
     return (`Team ${index + 1} (${student[0]} and ${student[1]}) will read '${bookTitleList[index]}'`);
 }); 
 
