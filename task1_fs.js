@@ -1,4 +1,4 @@
-// NPM Core Package - Fs
+// NPM Core Package - Filesystem 
 
 
 // Summary: 
