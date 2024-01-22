@@ -89,27 +89,24 @@ class Shirt extends EventEmitter {
 const redShortShirt = new Shirt('short sleeves', 'red', 10);
 const blueLongShirt = new Shirt('long sleeves', 'blue', 6.50);  
 
-// Function to trigger the 'on' method by passing the name of the object as a parameter 
-function addOnEvent(obj) {
-    obj.on('priceChange', ({changePercent, typeAltered, price}) => {
+// Initiate an array of the objects 
+let shirtArray = [redShortShirt, blueLongShirt]; 
+
+// Loop through the array of shirts and use the .on method to display the changes made to the price 
+shirtArray.forEach((shirt) => {
+    shirt.on('priceChange', ({changePercent, typeAltered, price}) => {
         let changeStr = (changePercent * 100).toString(); 
         let changeToDisplay = changeStr.startsWith('-') ? changeStr.substring(1) : changeStr; 
         console.log(`The price has ${typeAltered} by ${changeToDisplay}%. The new price is $${price}.`); 
         console.log(); 
         }); 
-
-}; 
+}); 
 
 console.log("Part 2: Object-Oriented Programming with 'Events':"); 
 console.log();
 
-// 
-addOnEvent(redShortShirt); 
-addOnEvent(blueLongShirt); 
 
-// 
+// Raise the alterPrice method to adjust the price of the shirt entered by the user (decimal value - not percentage)
 redShortShirt.alterPrice(-0.15); 
 blueLongShirt.alterPrice(.3); 
-
-
 
