@@ -43,18 +43,22 @@ fs.readdir(imgFolder, (error, files) => {
         });
 
        
-        http.createServer((req, res) => {
-            fetchFile(imgArray[2], res);
-        }).listen(port, () => {
-            console.log(`Server running at http://localhost:${port}/`);
-        });
+        let server = http.createServer((req, res) => {
+            console.log(`Request made on: ${req.headers.host}`); 
+    
+            fetchImg(imgArray[2], res);
+        })
+
+        server.listen(port, () => {
+            console.log(`Image '${imgArray[2]}' displayed on port ${port}.`); 
+        }); 
     }
 
     // Verify that the imgArray has the complete list of file names 
     console.log(imgArray);
 });
 
-function fetchFile(path, response) {
+function fetchImg(path, response) {
     fs.readFile(path, (error, content) => {
         if (error) {
             response.writeHead(500, { 'Content-Type': 'text/html' });
@@ -65,4 +69,6 @@ function fetchFile(path, response) {
         }
     });
 }
+
+
 
