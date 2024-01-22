@@ -36,7 +36,7 @@ console.log(studentTeams);
 console.log(); 
 
 
-// Use a _.map loop to organize and record teams and assignments information: 
+// Use a _.map loop to organize and record teams and assignment information: 
 // Team number (index)
 // Names of each team member
 // Book assigned for reading 
