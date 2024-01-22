@@ -1,4 +1,4 @@
-// NPM Core Package - Http 
+// NPM Core Package - Fs
 
 
 // Summary: 
@@ -9,7 +9,7 @@
 
 // Code: 
 
-// Three core packages required for this code - the three packages explored in Task 1!
+// Three core packages required for this code
 const http = require('http');
 const fs = require('fs');
 const path = require('path'); 
