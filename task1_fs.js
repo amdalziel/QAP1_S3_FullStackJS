@@ -18,6 +18,8 @@ const path = require('path');
 const port = 8080;
 const imgFolder = './Images/original_images/';
 
+
+// Read the directory of "imgFolder" 
 fs.readdir(imgFolder, (error, files) => {
 
     // Initialize an empty array to store the complete path for each image 
@@ -32,8 +34,8 @@ fs.readdir(imgFolder, (error, files) => {
     } else {
         let imgCount = 0; 
 
-    // Read the directory of "imgFolder" - for each file join the imgFolder path and file name in 
-    // a single variable "imgUrl" and store it in the imgArray. 
+    // For each file (in "imgFolder") join the imgFolder path and file name in 
+    // a single variable "imgUrl". Store each "imgUrl" in the imgArray. 
         files.forEach((file) => {
             imgUrl = path.join(imgFolder, file); 
             console.log(`Image ${imgCount}: ${imgUrl}`); 
@@ -44,13 +46,39 @@ fs.readdir(imgFolder, (error, files) => {
 
        
         let server = http.createServer((req, res) => {
-            console.log(`Request made on: ${req.headers.host}`); 
-    
-            fetchImg(imgArray[2], res);
-        })
+            let consoleImgNum = req.url.length == 1 ? "0" : req.url.slice(1); 
+            console.log(`Request made on: ${req.headers.host} for image ${consoleImgNum}`); 
+
+            // Display the img requested by the user using a switch statement 
+            switch (req.url) {
+                case '/':
+                    fetchImg(imgArray[0], res);
+                    break;
+                case '/0':
+                    fetchImg(imgArray[0], res);
+                    break;
+                case '/1':
+                    fetchImg(imgArray[1], res);
+                    break;
+                case '/2': 
+                    fetchImg(imgArray[2], res); 
+                    break; 
+                case '/3':
+                    fetchImg(imgArray[3], res);
+                    break;
+                case '/4':
+                    fetchImg(imgArray[4], res);
+                    break;
+                default:
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+                    res.end('404 not found');
+                    break; 
+            };
+
+        }); 
 
         server.listen(port, () => {
-            console.log(`Image '${imgArray[2]}' displayed on port ${port}.`); 
+            console.log(`Running on port ${port}`); 
         }); 
     }
 
@@ -58,6 +86,9 @@ fs.readdir(imgFolder, (error, files) => {
     console.log(imgArray);
 });
 
+// Function used for each case in the above switch statement. 
+// path parameter = imgArray[x] 
+// Content-type set to 'image/jpeg' to display the jpg files 
 function fetchImg(path, response) {
     fs.readFile(path, (error, content) => {
         if (error) {
