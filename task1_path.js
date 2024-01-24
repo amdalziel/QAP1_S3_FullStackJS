@@ -46,26 +46,34 @@ function isAbsoluteCheck(inputPath) {
 
 
 // Function 3: Use .join() to create additional paths 
-function useJoinMethod(joinParameter) {
-    let currentPath = path.resolve(__filename); 
-    let joinAdded = path.join(currentPath, joinParameter); 
-    console.log(`The path you wish to create is: ${joinAdded}`); 
+function useJoinMethod(...joinParameter) {
+    // Get the absolute path for the the 'Images' folder using .resolve() 
+    let imagesPath = path.resolve('Images'); 
+
+    // Join inputs given by the user to 'imagesPath'. The user may give 1 or many inputs (using rest parameters)
+    let addToImagesPath = path.join(imagesPath, ...joinParameter); 
+    console.log(`Your input has created the path: \n ${addToImagesPath}`); 
 }; 
 
 
+
+// Verify if the current file name and extension match the regular expression created 
 verifyPath(currFileName, reName); 
 verifyPath(currFileExt, reExt); 
 
 console.log(); 
 
-
+// Check if the inputs below are an absolute path 
 isAbsoluteCheck(currFileName); 
 isAbsoluteCheck(currFileExt); 
 isAbsoluteCheck(__dirname); 
 
 console.log();
 
-useJoinMethod('_joinMethod'); 
+// Create a path by adding to the /Images directory. 
+
+useJoinMethod('seville_images', 'alcazar_img1.jpg'); 
+useJoinMethod('icons', 'black&white'); 
 
 
 
