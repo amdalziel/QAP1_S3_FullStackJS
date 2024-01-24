@@ -2,7 +2,6 @@
 
 const sharp = require('sharp');
 
-
 // Image Objects - key(image name) and value (path)
 let sagrat_cor = {sagrat_cor: './Images/original_images/sagrat_cor.jpg'};
 let city_view = {city_view: './Images/original_images/city_view.jpg'}; 

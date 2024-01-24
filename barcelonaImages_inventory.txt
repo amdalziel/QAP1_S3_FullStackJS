@@ -1,0 +1,1 @@
+["Images/original_images/city_view.jpg","Images/original_images/gaudi_evening.jpg","Images/original_images/gaudi_facade.jpg","Images/original_images/sagrada_front.jpg","Images/original_images/sagrat_cor.jpg"]

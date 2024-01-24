@@ -1,4 +1,4 @@
-// NPM Core Package - Filesystem 
+// NPM Core Package - Filesystem (with a great deal of help from the http package!) 
 
 
 // Summary: 
@@ -38,44 +38,28 @@ fs.readdir(imgFolder, (error, files) => {
     // a single variable "imgUrl". Store each "imgUrl" in the imgArray. 
         files.forEach((file) => {
             imgUrl = path.join(imgFolder, file); 
-            console.log(`Image ${imgCount}: ${imgUrl}`); 
+            console.log(`Image ${imgCount}: ${imgUrl}`);
             imgArray.push(imgUrl);
 
             imgCount ++; 
         });
 
-       
+    //    Create a server using the core package 'http' 
         let server = http.createServer((req, res) => {
-            let consoleImgNum = req.url.length == 1 ? "0" : req.url.slice(1); 
-            console.log(`Request made on: ${req.headers.host} for image ${consoleImgNum}`); 
 
-            // Display the img requested by the user using a switch statement 
-            switch (req.url) {
-                case '/':
-                    fetchImg(imgArray[0], res);
-                    break;
-                case '/0':
-                    fetchImg(imgArray[0], res);
-                    break;
-                case '/1':
-                    fetchImg(imgArray[1], res);
-                    break;
-                case '/2': 
-                    fetchImg(imgArray[2], res); 
-                    break; 
-                case '/3':
-                    fetchImg(imgArray[3], res);
-                    break;
-                case '/4':
-                    fetchImg(imgArray[4], res);
-                    break;
-                default:
-                    res.writeHead(404, { 'Content-Type': 'text/plain' });
-                    res.end('404 not found');
-                    break; 
-            };
+    // Assign a consoleImgNum to each image - to keep track of requests in the console 
+            const consoleImgNum = req.url.length === 1 ? "0" : req.url.slice(1);
+            console.log(`Request made on: ${req.headers.host} for image ${consoleImgNum}`);
 
-        }); 
+    // Convert the consoleImgNum to an integer - and use this as the endpoint (imgIndex)
+            const imgIndex = parseInt(consoleImgNum);
+            if (imgIndex >= 0 && imgIndex < imgArray.length) {
+                fetchImg(imgArray[imgIndex], res);
+            } else {
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('404 not found');
+            }
+        });
 
         server.listen(port, () => {
             console.log(`Running on port ${port}`); 
@@ -84,6 +68,16 @@ fs.readdir(imgFolder, (error, files) => {
 
     // Verify that the imgArray has the complete list of file names 
     console.log(imgArray);
+
+    // Convert imgArray to JSON data 
+    const imagesJson = JSON.stringify(imgArray); 
+
+    // Store the image paths in a txt file using .writeFile - stored as JSON data 
+    // Note: will create a new file if it does not exist. It will OVERWRITE the file with current data if it already exists
+    fs.writeFile('barcelonaImages_inventory.txt', imagesJson, function(err) {
+        if(err) throw err; 
+        console.log("Inventory of images saved to barcelonaImages_inventory.txt"); 
+    }); 
 });
 
 // Function used for each case in the above switch statement. 
@@ -99,7 +93,7 @@ function fetchImg(path, response) {
             response.end(content, 'binary');
         }
     });
-}
+}; 
 
 
 
