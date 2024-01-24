@@ -21,45 +21,55 @@ let currFileName = path.parse(__filename).name;
 // Extract the current file ext using .parse().ext
 let currFileExt = path.parse(__filename).ext; 
 
-// Test the file name with the regular expression - state the results in the console. 
-let nameVerify = reName.test(currFileName); 
 
-if(nameVerify) {
-    console.log(`The current file name is task1_path.`)
-} else {
-    console.log(`The current file name is NOT task1_path.`)
+
+// Function 1: Test a path property (name, ext ...) with a regular expression - state the results in the console. 
+function verifyPath(inputFile, re){
+    let inputVerify = re.test(inputFile); 
+    if(inputVerify) {
+        console.log(`The input matches the regular expression given.`);
+    } else {
+        console.log(`The input does NOT match the regular expression given.`); 
+    }
 }; 
 
 
-// Test the file extension with the regular expression - state the results in the console. 
-let extVerify = reExt.test(currFileExt); 
-
-if(extVerify) {
-    console.log(`The current file extension is .js`)
-} else {
-    console.log(`The current file extension is NOT .js`)
+// Function 2: Check if an input given is an absolute path using .isAbsolute()
+function isAbsoluteCheck(inputPath) {
+    let checkAbsolute = path.isAbsolute(inputPath); 
+    if(checkAbsolute) {
+        console.log(`The path ${inputPath} is an absolute path.`)
+    } else {
+        console.log(`The path ${inputPath} is NOT an absolute path.`)
+    }
 }; 
 
 
-console.log(path.isAbsolute(currFileName)); 
-
-console.log(path.isAbsolute(currFileExt)); 
-
-console.log(path.isAbsolute(path.parse(__filename).root + path.parse(__filename).dir + path.parse(__filename).base)); 
-
-console.log(path.parse(__dirname)); 
-
+// Function 3: Use .join() to create additional paths 
+function useJoinMethod(joinParameter) {
+    let currentPath = path.resolve(__filename); 
+    let joinAdded = path.join(currentPath, joinParameter); 
+    console.log(`The path you wish to create is: ${joinAdded}`); 
+}; 
 
 
+verifyPath(currFileName, reName); 
+verifyPath(currFileExt, reExt); 
+
+console.log(); 
+
+
+isAbsoluteCheck(currFileName); 
+isAbsoluteCheck(currFileExt); 
+isAbsoluteCheck(__dirname); 
+
+console.log();
+
+useJoinMethod('_joinMethod'); 
 
 
 
 
-// let relPath = path.relative('/QAP_S3_FULLSTACKJS/task1_lodash.js', '/QAP_S3_FULLSTACKJS/task2_sharp.js'); 
-// let relPathReverse = path.relative('/QAP_S3_FULLSTACKJS/task2_sharp.js', '/QAP_S3_FULLSTACKJS/Images/original_images/sagrada_front.jpg'); 
-
-// console.log(relPath); 
-// console.log(relPathReverse); 
 
 
 
