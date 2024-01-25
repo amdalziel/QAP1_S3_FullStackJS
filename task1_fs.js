@@ -3,8 +3,7 @@
 
 // Summary: 
 
-
-
+// Please see Task1_Summaries.pdf  
 
 
 // Code: 
@@ -22,7 +21,7 @@ const imgFolder = './Images/original_images/';
 // Read the directory of "imgFolder" 
 fs.readdir(imgFolder, (error, files) => {
 
-    // Initialize an empty array to store the complete path for each image 
+    // Initialize an empty array to store the path for every image 
     let imgArray = [];
 
     // Initialize a variable to store the complete path for an image (using path.join)
@@ -75,13 +74,16 @@ fs.readdir(imgFolder, (error, files) => {
     // Store the image paths in a txt file using .writeFile - stored as JSON data 
     // Note: will create a new file if it does not exist. It will OVERWRITE the file with current data if it already exists
     fs.writeFile('barcelonaImages_inventory.txt', imagesJson, function(err) {
-        if(err) throw err; 
+        if(err) {
+            console.log(`Error writing data to file`, err); 
+        } else {
         console.log("Inventory of images saved to barcelonaImages_inventory.txt"); 
+        }
     }); 
 });
 
-// Function used for each case in the above switch statement. 
-// path parameter = imgArray[x] 
+// Function used in the above if statement 
+// imgArray[x] is passed to the function as 'path' 
 // Content-type set to 'image/jpeg' to display the jpg files 
 function fetchImg(path, response) {
     fs.readFile(path, (error, content) => {

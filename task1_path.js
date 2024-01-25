@@ -3,8 +3,7 @@
 
 // Summary: 
 
-
-
+// Please see Task1_Summaries.pdf 
 
 
 // Code: 
@@ -23,7 +22,7 @@ let currFileExt = path.parse(__filename).ext;
 
 
 
-// Function 1: Test a path property (name, ext ...) with a regular expression - state the results in the console. 
+// Function 1: Test a path object's property (name, extension, etc.) with a regular expression - state the results in the console. 
 function verifyPath(inputFile, re){
     let inputVerify = re.test(inputFile); 
     if(inputVerify) {
@@ -70,10 +69,10 @@ isAbsoluteCheck(__dirname);
 
 console.log();
 
-// Create a path by adding to the /Images directory. 
-
+// Create paths of folders and/or images that could be added to the 'Images' directory. 
 useJoinMethod('seville_images', 'alcazar_img1.jpg'); 
 useJoinMethod('icons', 'black&white'); 
+
 
 
 

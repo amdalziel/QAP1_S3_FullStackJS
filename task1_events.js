@@ -3,8 +3,7 @@
 
 // Summary: 
 
-
-
+// Please see Task1_Summaries.pdf  
 
 
 // Code: 
@@ -107,7 +106,7 @@ console.log("Part 2: Object-Oriented Programming with 'Events':");
 console.log();
 
 
-// Raise the alterPrice method to adjust the price of the shirt entered by the user (decimal value - not percentage)
+// Use the alterPrice method to adjust the price of the shirt entered by the user (user enters decimal value - not percentage)
 redShortShirt.alterPrice(-0.15); 
 blueLongShirt.alterPrice(.3); 
 
